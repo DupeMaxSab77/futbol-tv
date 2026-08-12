@@ -17,19 +17,24 @@ class MPVPlayer:
             "mpv",
             "--no-terminal",
             f"--title={title}",
-            # Buffer settings - smooth playback
-            "--demuxer-readahead-secs=30",
-            "--demuxer-max-bytes=50MiB",
-            "--cache-secs=30",
+            # Big buffer to avoid jumps
             "--cache=yes",
-            "--demuxer-max-back-bytes=25MiB",
+            "--demuxer-max-bytes=100MiB",
+            "--demuxer-readahead-secs=60",
+            "--cache-secs=60",
+            # Wait for buffer before playing
+            "--cache-pause-initial=yes",
+            "--cache-pause-wait=5",
+            # Don't skip frames
+            "--framedrop=no",
             # Network
             "--network-timeout=30",
             "--hr-seek=absolute",
+            # Keep ~30s behind live edge (avoids 403 + stalls)
+            "--hls-offset=30",
             # Display
             "--ontop",
             "--fs",
-            # HW decode for less CPU
             "--hwdec=auto",
             url,
         ]
