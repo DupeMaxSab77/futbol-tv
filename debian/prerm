@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+echo "=== Desinstalando FutbolTV ==="
+
+rm -f /usr/bin/futbol-tv
+rm -f /usr/share/applications/futbol-tv.desktop
+rm -f /usr/share/icons/hicolor/256x256/apps/futbol-tv.png
+rm -rf /opt/futbol-tv
+
+echo "=== FutbolTV desinstalado ==="

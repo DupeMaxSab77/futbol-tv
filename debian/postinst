@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+
+echo "=== Instalando FutbolTV ==="
+
+# Install system dependencies
+apt-get update
+apt-get install -y python3 python3-pyqt5 python3-requests mpv
+
+# Create install directory
+INSTALL_DIR="/opt/futbol-tv"
+mkdir -p "$INSTALL_DIR"
+
+# Copy files
+cp -r ../* "$INSTALL_DIR/"
+
+# Make main.py executable
+chmod +x "$INSTALL_DIR/main.py"
+
+# Create symlink in /usr/bin
+ln -sf "$INSTALL_DIR/main.py" /usr/bin/futbol-tv
+
+# Create desktop entry
+cat > /usr/share/applications/futbol-tv.desktop << 'EOF'
+[Desktop Entry]
+Name=FutbolTV
+Comment=Fútbol en vivo
+Exec=/usr/bin/futbol-tv
+Icon=futbol-tv
+Terminal=false
+Type=Application
+Categories=AudioVideo;Video;TV;
+EOF
+
+# Copy icon if exists
+if [ -f "$INSTALL_DIR/assets/icon.png" ]; then
+    cp "$INSTALL_DIR/assets/icon.png" /usr/share/icons/hicolor/256x256/apps/futbol-tv.png
+fi
+
+echo "=== FutbolTV instalado ==="
+echo "Ejecuta: futbol-tv"

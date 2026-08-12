@@ -1,0 +1,12 @@
+Package: futbol-tv
+Version: 1.0.0
+Section: multimedia
+Priority: optional
+Architecture: all
+Depends: python3 (>= 3.9), python3-pyqt5, python3-requests, mpv
+Maintainer: FutbolTV <admin@futboltv.com>
+Description: FutbolTV - Cliente de fútbol en vivo
+ cliente de escritorio para ver partidos de fútbol en vivo.
+ Se conecta al servidor FutbolTV para obtener la agenda de eventos
+ y canales disponibles. Reproduce streams m3u8 con mpv.
+ Soporta múltiples fuentes: la18hd, futbollibre, tarjetarojita y más.

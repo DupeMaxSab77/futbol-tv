@@ -1,0 +1,9 @@
+futbol-tv 1.0.0 unstable; urgency=medium
+
+  * Initial release
+  * PyQt5 GUI with match listing
+  * m3u8 stream playback via mpv
+  * Auto-refresh from FutbolTV server
+  * Search and filter events
+
+ -- FutbolTV <admin@futboltv.com>  Tue, 12 Aug 2026 12:00:00 +0000
