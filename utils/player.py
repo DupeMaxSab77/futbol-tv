@@ -17,15 +17,19 @@ class MPVPlayer:
             "mpv",
             "--no-terminal",
             f"--title={title}",
-            # Buffer
+            # BIG buffer - keeps ~30-60s behind live edge naturally
             "--cache=yes",
-            "--demuxer-max-bytes=50MiB",
-            "--demuxer-readahead-secs=30",
-            # Wait for buffer before playing
+            "--demuxer-max-bytes=100MiB",
+            "--demuxer-readahead-secs=60",
+            "--cache-secs=60",
+            # Wait 10s for initial buffer before playing
             "--cache-pause-initial",
-            "--cache-pause-wait=3",
+            "--cache-pause-wait=10",
             # Network
             "--network-timeout=30",
+            # Smooth playback
+            "--framedrop=no",
+            "--video-sync=audio-resample",
             # Display
             "--ontop",
             "--fs",
