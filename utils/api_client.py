@@ -28,7 +28,7 @@ def fetch_channels() -> dict:
 def resolve_stream(embed_path: str) -> Optional[str]:
     """Resolve an embed path to an m3u8 stream URL."""
     try:
-        resp = requests.get(f"{API_STREAM}/{embed_path}", timeout=15)
+        resp = requests.get(API_STREAM, params={"url": embed_path}, timeout=15)
         resp.raise_for_status()
         return resp.json().get("url")
     except Exception as e:
