@@ -257,6 +257,7 @@ class MainWindow(QMainWindow):
         self.channels = {}
 
         self.signals.events_loaded.connect(self._on_events_loaded)
+        self.signals.stream_resolved.connect(self._on_stream_resolved)
         self.signals.error.connect(self._on_error)
         self.signals.status_update.connect(self._on_status)
 
