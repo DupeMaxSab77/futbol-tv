@@ -1,7 +1,6 @@
 import subprocess
 import signal
 import os
-import sys
 
 
 class MPVPlayer:
@@ -16,11 +15,22 @@ class MPVPlayer:
 
         cmd = [
             "mpv",
-            "--no-cache",
             "--no-terminal",
             f"--title={title}",
+            # Buffer settings - smooth playback
+            "--demuxer-readahead-secs=30",
+            "--demuxer-max-bytes=50MiB",
+            "--cache-secs=30",
+            "--cache=yes",
+            "--demuxer-max-back-bytes=25MiB",
+            # Network
+            "--network-timeout=30",
+            "--hr-seek=absolute",
+            # Display
             "--ontop",
-            "--fullscreen",
+            "--fs",
+            # HW decode for less CPU
+            "--hwdec=auto",
             url,
         ]
 
