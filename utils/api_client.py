@@ -1,6 +1,7 @@
 import requests
 from typing import Optional
-from config import API_EVENTS, API_CHANNELS, API_STREAM
+from config import API_EVENTS, API_CHANNELS
+from scraper.extractor import get_stream_url
 
 
 def fetch_events() -> list[dict]:
@@ -26,11 +27,5 @@ def fetch_channels() -> dict:
 
 
 def resolve_stream(embed_path: str) -> Optional[str]:
-    """Resolve an embed path to an m3u8 stream URL."""
-    try:
-        resp = requests.get(API_STREAM, params={"url": embed_path}, timeout=15)
-        resp.raise_for_status()
-        return resp.json().get("url")
-    except Exception as e:
-        print(f"[api] Error resolving stream: {e}")
-        return None
+    """Resolve an embed path to an m3u8 URL locally."""
+    return get_stream_url(embed_path)
