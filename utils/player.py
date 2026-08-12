@@ -17,21 +17,15 @@ class MPVPlayer:
             "mpv",
             "--no-terminal",
             f"--title={title}",
-            # Big buffer to avoid jumps
+            # Buffer
             "--cache=yes",
-            "--demuxer-max-bytes=100MiB",
-            "--demuxer-readahead-secs=60",
-            "--cache-secs=60",
+            "--demuxer-max-bytes=50MiB",
+            "--demuxer-readahead-secs=30",
             # Wait for buffer before playing
-            "--cache-pause-initial=yes",
-            "--cache-pause-wait=5",
-            # Don't skip frames
-            "--framedrop=no",
+            "--cache-pause-initial",
+            "--cache-pause-wait=3",
             # Network
             "--network-timeout=30",
-            "--hr-seek=absolute",
-            # Keep ~30s behind live edge (avoids 403 + stalls)
-            "--hls-offset=30",
             # Display
             "--ontop",
             "--fs",
@@ -54,7 +48,6 @@ class MPVPlayer:
             raise
 
     def stop(self):
-        """Stop the current playback."""
         if self.process and self.process.poll() is None:
             try:
                 os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
